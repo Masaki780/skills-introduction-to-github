@@ -1,0 +1,91 @@
+package jp.co.fl.superintro.ch8;
+
+import java.util.Scanner;
+
+public class HighAndLowGame {
+	public static void main(String[] args) {
+		
+		//ゲーム開始、タイトル表示
+		System.out.println("****************************");
+		System.out.println("*          High & Low         *");
+		System.out.println("****************************");
+		System.out.println();
+		System.out.println("---------ゲーム開始--------");
+	
+		//ループにするときは、変数の再宣言を避けるため変数はループ外で宣言
+		//String XX;
+		//XX = sc.nextLine();はテキスト外の内容
+		Scanner sc = new Scanner(System.in);
+		String str;	
+		
+		boolean guess =false;
+		//outerloopというラベルを定義して外側のループを抜けることができる(テキスト外の内容)			
+		outerloop:
+		//問題表示		
+		while(!guess) {
+		    	//継続ゲーム時に整数をランダムでだせるようにwhile直下に変数宣言
+			int num1 = (int)(Math.random()*9)+1;
+			int num2 = (int)(Math.random()*9)+1;
+
+		    	System.out.println();
+			System.out.println("            [問題表示]            ");
+			System.out.println("＊＊＊＊＊　＊＊＊＊＊");
+			System.out.println("＊　　　＊　＊　＊　＊");
+			System.out.println("＊　"+num1+"  　＊　＊　＊　＊");
+			System.out.println("＊　　　＊　＊　＊　＊");
+			System.out.println("＊＊＊＊＊　＊＊＊＊＊");
+			System.out.print("　High　or　Low　?(h/l) ＞");
+			str = sc.nextLine();
+
+				
+		    if(str.equals("h")) {
+		    System.out.println("→「High」を選択しました。");
+		    System.out.println();
+		    System.out.println("            [結果表示]            ");
+		    System.out.println("＊＊＊＊＊　＊＊＊＊＊");
+		    System.out.println("＊　　　＊　＊　　　＊");
+		    System.out.println("＊　"+num1+" 　 ＊　＊　"+num2+" 　＊");
+		    System.out.println("＊　　　＊　＊　　　＊");
+		    System.out.println("＊＊＊＊＊　＊＊＊＊＊");
+		    	//勝ち条件（Highが正しい時、数が同じ時の計2パターン）、ゲーム継続のため繰り返し
+		    	if((num1<num2 && str.equals("h")) || (num1==num2 && str.equals("h"))) {
+			System.out.println("→ You Win !");
+			guess =false;
+			continue outerloop;	
+			//負け条件（Highが間違っている時の1パターン）、ゲーム終了のため処理を抜ける	
+			}else if(num1>num2 && str.equals("h")) {
+			System.out.println("→ You Lose...");
+			System.out.println("---------ゲーム終了--------");
+			}
+		    	break outerloop;	
+			
+		    }else if(str.equals("l")) {
+		    System.out.println("→「Low」を選択しました。");
+		    System.out.println();
+		    System.out.println("            [結果表示]            ");
+		    System.out.println("＊＊＊＊＊　＊＊＊＊＊");
+		    System.out.println("＊　　　＊　＊　　　＊");
+		    System.out.println("＊　"+num1+" 　 ＊　＊　"+num2+" 　＊");
+		    System.out.println("＊　　　＊　＊　　　＊");
+		    System.out.println("＊＊＊＊＊　＊＊＊＊＊");
+		    	//勝ち条件（Lowが正しい時、数が同じ時の計2パターン）、ゲーム継続のため繰り返し
+			if((num1>num2 && str.equals("l")) || (num1==num2 && str.equals("l"))) {
+			System.out.println("→ You Win !");
+			guess = false;
+			continue outerloop;	
+			//負け条件（Lowが間違っている時の1パターン）、ゲーム終了のため処理を抜ける
+			}else if(num1<num2 && str.equals("l")) {
+			System.out.println("→ You Lose...");
+			System.out.println("---------ゲーム終了--------");
+			}
+			break outerloop;			
+			
+		    }else {
+		    System.out.println("無効な入力です。再入力してください。");
+		    continue outerloop;
+		    }
+		
+		}			
+
+	}				
+}
